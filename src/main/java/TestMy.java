@@ -54,7 +54,7 @@ public class TestMy {
     }
 
     /* click calculation --> check the result */
-    @Test(dependsOnMethods = "test3", alwaysRun = true) /* click calculation --> check the result */
+    @Test(dependsOnMethods = "test3", alwaysRun = true)
     public void test4() throws InterruptedException {
 
         WebElement goButton = driver.findElement(By.xpath(".//*[@id='gobutton']"));
