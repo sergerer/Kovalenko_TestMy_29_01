@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -15,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 public class TestMy {
     private WebDriver driver;
 
-
     @BeforeTest
     public void setup() {
 
@@ -26,11 +26,50 @@ public class TestMy {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Test /* go to the URL */
+    /* go to the URL */
+    @Test
     public void test1() {
         driver.navigate().to("http://juliemr.github.io/protractor-demo/");
         Assert.assertEquals(driver.getCurrentUrl(), "http://juliemr.github.io/protractor-demo/");
-                        }
     }
 
+    /* input digits into fields*/
+    @Test(dependsOnMethods = "test1")
+    public void test2() {
+        WebElement FirstField = driver.findElement(By.xpath("//input[@ng-model='first']"));
+        FirstField.sendKeys("1");
+        WebElement SecondField = driver.findElement(By.xpath("//input[@ng-model='second']"));
+        SecondField.sendKeys("1");
+        Assert.assertEquals(FirstField.getAttribute("value"), "1");
+        Assert.assertEquals(SecondField.getAttribute("value"), "1");
+    }
+    /* select operation with digits */
+    @Test(dependsOnMethods = "test2", alwaysRun = true)
+    public void test3() {
+        Select action = new Select(driver.findElement(By.xpath("//select[@ng-model='operator']")));
+        action.selectByVisibleText("+");
+        String proverka = driver.findElement(By.xpath("//option[1]")).getText();
+        Assert.assertEquals(proverka, "+");
 
+    }
+
+    /* click calculation --> check the result */
+    @Test(dependsOnMethods = "test3", alwaysRun = true) /* click calculation --> check the result */
+    public void test4() throws InterruptedException {
+
+        WebElement goButton = driver.findElement(By.xpath(".//*[@id='gobutton']"));
+        goButton.click();
+        WebElement result = driver.findElement(By.xpath("//td[3]"));
+        Assert.assertEquals(result.getText(), "2");
+        /**Thread.sleep(100000);*/
+    }
+
+    /*close browser/off selenium*/
+    @AfterTest(alwaysRun = true)
+
+    public void afterTest() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
