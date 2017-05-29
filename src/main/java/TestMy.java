@@ -61,7 +61,7 @@ public class TestMy {
         goButton.click();
         WebElement result = driver.findElement(By.xpath("//td[3]"));
         Assert.assertEquals(result.getText(), "2");
-        /**Thread.sleep(100000);*/
+        /**Thread.sleep(10000); - works as expected w/o any delay*/
     }
 
     /*close browser/off selenium*/
