@@ -2,11 +2,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -59,9 +62,10 @@ public class TestMy {
 
         WebElement goButton = driver.findElement(By.xpath(".//*[@id='gobutton']"));
         goButton.click();
-        WebElement result = driver.findElement(By.xpath("//td[3]"));
-        Assert.assertEquals(result.getText(), "2");
-        /**Thread.sleep(10000); - works as expected without additional delay*/
+        WebDriverWait wait = new WebDriverWait(driver,5);
+        wait.withTimeout(10, TimeUnit.SECONDS);
+        wait.pollingEvery(1, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.textToBePresentInElement(By.xpath("//h2"), String.valueOf('2')));
     }
 
     /*close browser/off selenium*/
@@ -73,3 +77,13 @@ public class TestMy {
         }
     }
 }
+
+   /* click calculation --> check the result */
+/**   @Test(dependsOnMethods = "test3", alwaysRun = true)
+    public void test4() throws InterruptedException {
+
+        WebElement goButton = driver.findElement(By.xpath(".//*[@id='gobutton']"));
+        goButton.click();
+        WebElement result = driver.findElement(By.xpath("//td[3]"));
+        Assert.assertEquals(result.getText(), "2");
+        /* Thread.sleep(8000); - works as expected without additional delay*/
