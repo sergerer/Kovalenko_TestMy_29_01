@@ -41,7 +41,7 @@
                 <inherited>true</inherited>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>.\src\resources\Test.xml</suiteXmlFile>
+                        <suiteXmlFile>.\src\resources\Testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
