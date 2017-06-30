@@ -7,7 +7,23 @@
     <groupId>1_1</groupId>
     <artifactId>1_1_22</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.testing</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -32,21 +48,5 @@
         </plugins>
     </build>
 
-    <dependencies>
-    <dependency>
-        <groupId>org.testing</groupId>
-        <artifactId>testng</artifactId>
-        <version>6.9.6</version>
-    </dependency>
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>3.4.0</version>
-    </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-    </dependencies>
+
 </project>
